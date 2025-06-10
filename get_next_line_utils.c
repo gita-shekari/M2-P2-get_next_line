@@ -6,7 +6,7 @@
 /*   By: gshekari <gshekari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:54:36 by gshekari          #+#    #+#             */
-/*   Updated: 2025/05/16 22:58:06 by gshekari         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:36:22 by gshekari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 	{
 		i++;
@@ -28,20 +30,18 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*joinstr;
 	size_t	len;
-	size_t	i;
 
+	joinstr = NULL;
 	if (!s1)
 		s1 = ft_strdup("");
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	joinstr = NULL;
-	i = 0;
 	joinstr = (char *)malloc(len);
 	if (!joinstr)
 		return (NULL);
-	if (s1)
-		ft_strlcpy(joinstr, s1, ft_strlen(s1) + 1);
-	if (s2)
-		ft_strlcat(joinstr, s2, len);
+	ft_strlcpy(joinstr, s1, ft_strlen(s1) + 1);
+	ft_strlcat(joinstr, s2, len);
+	if (!joinstr || joinstr[0] == '\0')
+		return (free(s1), NULL);
 	free(s1);
 	return (joinstr);
 }
@@ -55,7 +55,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	dest_size = ft_strlen(dest);
 	src_size = ft_strlen(src);
 	i = 0;
-	if (size <= (dest_size))
+	if (size <= dest_size)
 		return (size + src_size);
 	while (src[i] != '\0' && (dest_size + i) < (size - 1))
 	{
@@ -94,11 +94,11 @@ char	*ft_strdup(const char *s)
 	size = ft_strlen(s);
 	copy = (char *)malloc(size + 1);
 	if (!copy)
-		return (0);
+		return (NULL);
 	while (i < size + 1)
 	{
 		copy[i] = s[i];
-		i ++;
+		i++;
 	}
 	return (copy);
 }

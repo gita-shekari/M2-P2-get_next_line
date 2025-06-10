@@ -6,7 +6,7 @@
 /*   By: gshekari <gshekari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:34:13 by gshekari          #+#    #+#             */
-/*   Updated: 2025/05/16 23:06:45 by gshekari         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:55:08 by gshekari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	*get_next_line(int fd);
 char	*stash_trim(char *stash, size_t index);
 char	*extract_line(char *stash);
 char	*ft_strdup(const char *s);
+int		ft_strchr(const char *s, int c);
 
 #endif
